@@ -34,11 +34,21 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const sortMovies = function(movies, parent) {
         parent.innerHTML = '';
-        movies.sort().forEach((movie, i) => parent.innerHTML += `
-        <li class="promo__interactive-item">
-            ${i+1}. ${movie}
-            <div class="delete"></div>
-        </li>`);
+        movies.sort();
+        
+        movies.forEach((movie, i) => parent.innerHTML += `
+            <li class="promo__interactive-item">
+                ${i+1}. ${movie}
+                <div class="delete"></div>
+            </li>`);
+
+        parent.querySelectorAll('.delete').forEach((btn, i) => {
+            btn.addEventListener('click', () => {
+                btn.parentElement.remove();
+                movies.splice(i, 1);
+                sortMovies(movies, parent);
+            });
+        });
     };
 
     sortMovies(movieDB.movies, movieList);
@@ -64,7 +74,8 @@ window.addEventListener('DOMContentLoaded', () => {
         addForm.reset();
     });
 
-    movieList.addEventListener('click', (evt) => {
+    // alternative delete
+/*     movieList.addEventListener('click', (evt) => {
         if (evt.target.classList.contains('delete')) {
             let deleteMovie = evt.target.parentElement.textContent.trim();
             for (let i in movieDB.movies) {
@@ -75,6 +86,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
-    });
+    }); */
 
 });
