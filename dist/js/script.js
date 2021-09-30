@@ -22,7 +22,11 @@ window.addEventListener('DOMContentLoaded', () => {
         genre = promoBg.querySelector('.promo__genre'),
         movieList = document.querySelector('.promo__interactive-list');
 
-    ads.forEach(image => image.remove());
+    const deleteAdds = (arr) => {
+        arr.forEach(image => image.remove());
+    }    
+
+    deleteAdds(ads);
 
     genre.textContent = 'драма';
 

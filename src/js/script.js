@@ -22,7 +22,11 @@ window.addEventListener('DOMContentLoaded', () => {
         genre = promoBg.querySelector('.promo__genre'),
         movieList = document.querySelector('.promo__interactive-list');
 
-    ads.forEach(image => image.remove());
+    const deleteAdds = (arr) => {
+        arr.forEach(image => image.remove());
+    };    
+
+    deleteAdds(ads);
 
     genre.textContent = 'драма';
 
@@ -64,7 +68,8 @@ window.addEventListener('DOMContentLoaded', () => {
         if (evt.target.classList.contains('delete')) {
             let deleteMovie = evt.target.parentElement.textContent.trim();
             for (let i in movieDB.movies) {
-                if (deleteMovie.includes(movieDB.movies[i])) {
+                if (deleteMovie.includes(movieDB.movies[i]) && (deleteMovie.length - 
+                    movieDB.movies[i].length) <= 4) {
                     movieDB.movies.splice(i, 1);
                     sortMovies(movieDB.movies, movieList);
                 }
